@@ -25,12 +25,15 @@ class HomeFragment : Fragment() {
 
     private val adapterListener = object : CinemaListRvAdapter.OnItemClickListener {
         override fun onItemClick(cinema: Cinema) {
-            val bundle = Bundle()
-            bundle.putParcelable(DetailFragment.BUNDLE_DETAIL, cinema)
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.nav_host_fragment, DetailFragment.newInstance(bundle))
-                .addToBackStack("")
-                .commit()
+            val manager = activity?.supportFragmentManager
+            if (manager != null) {
+                val bundle = Bundle()
+                bundle.putParcelable(DetailFragment.BUNDLE_DETAIL, cinema)
+                manager.beginTransaction()
+                    .replace(R.id.main_container, DetailFragment.newInstance(bundle))
+                    .addToBackStack("")
+                    .commit()
+            }
         }
     }
 
