@@ -28,7 +28,7 @@ class DetailFragment : Fragment() {
         val cinema = arguments?.getParcelable<Cinema>(BUNDLE_DETAIL)
         if (cinema != null) {
             //Заполняем по всем полям, доделаю как начнем подгружать данные
-            binding.detailFragmentMtvOriginalNameOfCinema.text = cinema.originalTitle
+            binding.mtvOriginalNameOfCinema.text = cinema.originalTitle
 
         }
     }

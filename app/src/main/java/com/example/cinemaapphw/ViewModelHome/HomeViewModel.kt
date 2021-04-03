@@ -10,7 +10,7 @@ import com.example.testcinema.Repository.Repository
 import com.example.testcinema.Repository.RepositoryImpl
 import java.lang.Thread.sleep
 
-class HomeViewModel (private var state: MutableLiveData<AppState> = MutableLiveData(),
+class HomeViewModel (private val state: MutableLiveData<AppState> = MutableLiveData(),
                      private val repositoryImpl: Repository = RepositoryImpl()
 ) : ViewModel() {
 
