@@ -25,11 +25,13 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val cinema = arguments?.getParcelable<Cinema>(BUNDLE_DETAIL)
-        if (cinema != null) {
-            //Заполняем по всем полям, доделаю как начнем подгружать данные
-            binding.mtvOriginalNameOfCinema.text = cinema.originalTitle
+        arguments?.getParcelable<Cinema>(BUNDLE_DETAIL)?.let {
+            it.also {
+                with(it) {
+                    binding.mtvOriginalNameOfCinema.text = originalTitle
+                }
 
+            }
         }
     }
 

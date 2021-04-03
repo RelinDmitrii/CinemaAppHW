@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.cinemaapphw.MainActivity
 import com.example.cinemaapphw.R
 import com.example.cinemaapphw.RV.CinemaListRvAdapter
 import com.example.cinemaapphw.databinding.FragmentHomeBinding
@@ -19,23 +21,20 @@ import com.google.android.material.snackbar.Snackbar
 class HomeFragment : Fragment() {
     private lateinit var cinemaListRvAdapter: CinemaListRvAdapter
     private lateinit var cinemaList2RvAdapter: CinemaListRvAdapter
-    private lateinit var homeViewModel: HomeViewModel
+
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
+    private val homeViewModel: HomeViewModel by lazy { ViewModelProvider(this).get(HomeViewModel::class.java) }
+
     private val adapterListener = object : CinemaListRvAdapter.OnItemClickListener {
         override fun onItemClick(cinema: Cinema) {
-            val manager = activity?.supportFragmentManager
-            if (manager != null) {
-                val bundle = Bundle()
-                bundle.putParcelable(DetailFragment.BUNDLE_DETAIL, cinema)
-                manager.beginTransaction()
-                    .replace(R.id.main_container, DetailFragment.newInstance(bundle))
-                    .addToBackStack("")
-                    .commit()
+            val bundle = Bundle()
+            bundle.putParcelable(DetailFragment.BUNDLE_DETAIL, cinema)
+            (activity as MainActivity).support.addFragment(DetailFragment.newInstance(bundle), true)
             }
         }
-    }
+
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -48,7 +47,6 @@ class HomeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         createAdapter()
-        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         homeViewModel.getData().observe(viewLifecycleOwner, Observer {
             renderData(it)
         })
@@ -69,6 +67,7 @@ class HomeFragment : Fragment() {
             }
             is AppState.Error -> {
                 binding.loadingLayout.visibility = View.GONE
+                binding.loadingLayout.showSnackBar(R.string.error)
                 Snackbar
                         .make(
                                 binding.homeFragmentTvTitleNowPlaying,
@@ -86,6 +85,14 @@ class HomeFragment : Fragment() {
         cinemaList2RvAdapter = CinemaListRvAdapter(adapterListener)
         binding.homeFragmentRecyclerFirst.adapter = cinemaListRvAdapter
         binding.homeFragmentRecyclerSecond.adapter = cinemaList2RvAdapter
+    }
+
+    private fun View.showSnackBar(
+        @StringRes
+        stringRes: Int,
+        length: Int = Snackbar.LENGTH_SHORT
+    ) {
+        Snackbar.make(this, stringRes, length).show()
     }
 
     override fun onDestroy() {
