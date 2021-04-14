@@ -39,11 +39,13 @@ class CinemaListRvAdapter(private val onItemClickListener: OnItemClickListener) 
         return cinema.size
     }
 
+    // Для теста убрал загрузку в 2 разных списка.
+    // Не смог найти на сайте как правильно подгружать списки по дате релиза, закрою этот вопрос в следующем дз
     override fun getItemViewType(position: Int): Int {
         return if (cinema[position].status == "Released") {
             0
         } else {
-            1
+           0
         }
     }
 

@@ -59,7 +59,7 @@ class HomeFragment : Fragment() {
                 //Получение данных
                 binding.loadingLayout.visibility = View.GONE
                 cinemaListRvAdapter.cinema = appState.CinemaNowPlayingList
-                cinemaList2RvAdapter.cinema = appState.CinemaUpcomingList
+                //cinemaList2RvAdapter.cinema = appState.CinemaUpcomingList
 
             }
             is AppState.Loading -> {

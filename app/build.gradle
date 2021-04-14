@@ -14,7 +14,7 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -34,6 +34,7 @@ android {
     buildFeatures {
         viewBinding true
     }
+
 
 }
 
@@ -80,5 +81,8 @@ dependencies {
 
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+    implementation 'com.github.bumptech.glide:glide:4.6.1'
+    implementation 'com.android.support:multidex:1.0.3'
 }
 apply plugin: 'kotlin-android-extensions'
