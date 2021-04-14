@@ -1,11 +1,14 @@
 package com.example.cinemaapphw
 
+import android.content.IntentFilter
+import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.cinemaapphw.Support.MainBroadcastReceiver
 import com.example.cinemaapphw.Support.Support
 import com.example.cinemaapphw.ui.Fragments.FavoritesFragment.FavoritesFragment
 import com.example.cinemaapphw.ui.Fragments.HomeFragment.HomeFragment
@@ -14,6 +17,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
+    private val receiver = MainBroadcastReceiver()
     lateinit var support: Support
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,6 +31,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
+
+        registerReceiver(receiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
 
         navView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
@@ -43,4 +49,10 @@ class MainActivity : AppCompatActivity() {
             true
         }
     }
+
+    override fun onDestroy() {
+        unregisterReceiver(receiver)
+        super.onDestroy()
+    }
+
 }
