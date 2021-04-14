@@ -4,10 +4,6 @@ import android.content.IntentFilter
 import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import com.example.cinemaapphw.Support.MainBroadcastReceiver
 import com.example.cinemaapphw.Support.Support
 import com.example.cinemaapphw.ui.Fragments.FavoritesFragment.FavoritesFragment

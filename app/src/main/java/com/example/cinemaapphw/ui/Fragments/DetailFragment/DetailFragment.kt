@@ -7,15 +7,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.cinemaapphw.Support.CinemaLoader
 import com.example.cinemaapphw.databinding.FragmentDetailBinding
 import com.example.testcinema.DataClasses.Cinema
+import com.example.testcinema.ui.ViewModelHome.AppState
 import kotlinx.android.synthetic.main.fragment_detail.*
 
-class DetailFragment : Fragment(), CinemaLoader.CinemaLoaderListener {
+class DetailFragment : Fragment() {
 
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: DetailsViewModel by lazy { ViewModelProvider(this).get(DetailsViewModel::class.java) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,12 +34,22 @@ class DetailFragment : Fragment(), CinemaLoader.CinemaLoaderListener {
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         arguments?.getParcelable<Cinema>(BUNDLE_DETAIL)?.let {
             it.also {
-                val loader = CinemaLoader(this, it.id)
-                loader.loadCinema()
+//                val loader = CinemaLoader(this, it.id)
+//                loader.loadCinema()
+                viewModel.getLiveData().observe(viewLifecycleOwner, Observer { renderData(it) })
+                viewModel.getCinemaFromRemoteSource(it.id)
             }
+        }
+    }
 
+    private fun renderData(appState: AppState) {
+        when (appState) {
+            is AppState.SuccessDetails -> {
+                displayCinema(appState.cinema)
+            }
         }
     }
 
@@ -55,19 +69,10 @@ class DetailFragment : Fragment(), CinemaLoader.CinemaLoaderListener {
         }
     }
 
-    override fun onLoaded(cinema: Cinema) {
-        displayCinema(cinema)
-    }
-
-    override fun onFailed(throwable: Throwable) {
-        TODO("Not yet implemented")
-    }
-
     private fun displayCinema(cinema: Cinema) {
         with(binding) {
-            mtv_title.text = cinema.originalTitle
-            mtv_original_name_of_cinema.text = cinema.popularity.toString()
+            mtvTitle.text = cinema.originalTitle
+            mtvOriginalNameOfCinema.text = cinema.popularity.toString()
         }
-
     }
 }
