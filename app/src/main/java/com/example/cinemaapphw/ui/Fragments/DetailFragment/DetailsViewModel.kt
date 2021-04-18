@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.cinemaapphw.Repository.RemoteDataSource
+import com.example.cinemaapphw.ViewModelHome.App.Companion.getFavoritesDao
 import com.example.testcinema.DataClasses.Cinema
 import com.example.testcinema.Repository.Repository
 import com.example.testcinema.Repository.RepositoryImpl
@@ -16,7 +17,8 @@ private const val REQUEST_ERROR = "Ошибка запроса на сервер
 
 class DetailsViewModel (private val state: MutableLiveData<AppState> = MutableLiveData(),
                         private val detailRepositoryImpl: Repository = RepositoryImpl(
-                            RemoteDataSource()
+                            RemoteDataSource(),
+                            getFavoritesDao()
                         )
 ) : ViewModel() {
 
@@ -41,4 +43,11 @@ class DetailsViewModel (private val state: MutableLiveData<AppState> = MutableLi
         }
 
     }
+
+
+    fun addToFavorites(){
+        val appstate = state.value as AppState.SuccessDetails
+        detailRepositoryImpl.saveCinemaToFavorites(appstate.cinema)
+    }
+
 }

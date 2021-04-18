@@ -26,12 +26,17 @@ class RemoteDataSource {
 
     @RequiresApi(Build.VERSION_CODES.N)
     fun getCinemaDetails(id: Int, callback: Callback<Cinema>) {
-        cinemaAPI.getCinema(id, API).enqueue(callback)
+        cinemaAPI.getCinema(id, key = API).enqueue(callback)
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
-    fun getListCinema(callback: Callback<JsonObject>) {
-        cinemaAPI.getCinemaList(key = API).enqueue(callback)
+    fun getListCinemaNowPlaying(callback: Callback<JsonObject>) {
+        cinemaAPI.getCinemaListNowPlaying(key = API).enqueue(callback)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    fun getListCinemaUpcoming(callback: Callback<JsonObject>) {
+        cinemaAPI.getCinemaListUpcoming(key = API).enqueue(callback)
     }
 
 

@@ -7,7 +7,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.cinemaapphw.R
 import com.example.testcinema.DataClasses.Cinema
 
-class CinemaListRvAdapter(private val onItemClickListener: OnItemClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+const val NOW_PLAYING_TYPE = 0;
+const val UPCOMING_TYPE = 1;
+
+class CinemaListRvAdapter(
+    private val onItemClickListener: OnItemClickListener,
+    private val viewTypeFlag: Int
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var cinema = listOf<Cinema>()
         set(value) {
@@ -24,10 +30,16 @@ class CinemaListRvAdapter(private val onItemClickListener: OnItemClickListener) 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return if (viewType == 0){
-            NowPlayingViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.now_playing_card, parent, false), onItemClickListener)
-        } else{
-            UpComingViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.upcoming_card, parent, false), onItemClickListener)
+        return if (viewTypeFlag == NOW_PLAYING_TYPE) {
+            NowPlayingViewHolder(
+                LayoutInflater.from(parent.context)
+                    .inflate(R.layout.now_playing_card, parent, false), onItemClickListener
+            )
+        } else {
+            UpComingViewHolder(
+                LayoutInflater.from(parent.context).inflate(R.layout.upcoming_card, parent, false),
+                onItemClickListener
+            )
         }
     }
 
@@ -39,14 +51,5 @@ class CinemaListRvAdapter(private val onItemClickListener: OnItemClickListener) 
         return cinema.size
     }
 
-    // Для теста убрал загрузку в 2 разных списка.
-    // Не смог найти на сайте как правильно подгружать списки по дате релиза, закрою этот вопрос в следующем дз
-    override fun getItemViewType(position: Int): Int {
-        return if (cinema[position].status == "Released") {
-            0
-        } else {
-           0
-        }
-    }
 
 }

@@ -11,6 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.cinemaapphw.MainActivity
 import com.example.cinemaapphw.R
 import com.example.cinemaapphw.RV.CinemaListRvAdapter
+import com.example.cinemaapphw.RV.NOW_PLAYING_TYPE
+import com.example.cinemaapphw.RV.UPCOMING_TYPE
 import com.example.cinemaapphw.databinding.FragmentHomeBinding
 import com.example.cinemaapphw.ui.Fragments.DetailFragment.DetailFragment
 import com.example.testcinema.DataClasses.Cinema
@@ -47,7 +49,10 @@ class HomeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         createAdapter()
-        homeViewModel.getData().observe(viewLifecycleOwner, Observer {
+        homeViewModel.getDataNowPlaying().observe(viewLifecycleOwner, Observer {
+            renderData(it)
+        })
+        homeViewModel.getDataUpcoming().observe(viewLifecycleOwner, {
             renderData(it)
         })
         homeViewModel.getDataFromRemote()
@@ -55,15 +60,19 @@ class HomeFragment : Fragment() {
 
     private fun renderData(appState: AppState) {
         when (appState) {
-            is AppState.Success -> {
-                //Получение данных
+            is AppState.SuccessNowPlaying -> {
                 binding.loadingLayout.visibility = View.GONE
                 cinemaListRvAdapter.cinema = appState.CinemaNowPlayingList
-                //cinemaList2RvAdapter.cinema = appState.CinemaUpcomingList
 
             }
+            is AppState.SuccessUpcoming -> {
+                binding.loadingLayout.visibility = View.GONE
+                cinemaList2RvAdapter.cinema = appState.CinemaUpcomingList
+            }
+
             is AppState.Loading -> {
                 binding.loadingLayout.visibility = View.VISIBLE
+
             }
             is AppState.Error -> {
                 binding.loadingLayout.visibility = View.GONE
@@ -81,8 +90,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun createAdapter() {
-        cinemaListRvAdapter = CinemaListRvAdapter(adapterListener)
-        cinemaList2RvAdapter = CinemaListRvAdapter(adapterListener)
+        cinemaListRvAdapter = CinemaListRvAdapter(adapterListener, NOW_PLAYING_TYPE)
+        cinemaList2RvAdapter = CinemaListRvAdapter(adapterListener, UPCOMING_TYPE)
         binding.homeFragmentRecyclerFirst.adapter = cinemaListRvAdapter
         binding.homeFragmentRecyclerSecond.adapter = cinemaList2RvAdapter
     }
