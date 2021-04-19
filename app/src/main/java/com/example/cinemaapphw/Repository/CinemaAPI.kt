@@ -16,9 +16,16 @@ interface CinemaAPI {
         @Query("api_key") key: String
     ): Call<Cinema>
 
-    @GET("3/discover/movie")
-    fun getCinemaList(
-        @Query("sort_by") sort_by: String = "popularity.desc",
+    @GET("3/movie/now_playing")
+    fun getCinemaListNowPlaying(
+        @Query("language") language: String = "ru-RU",
+        @Query("api_key") key: String
+    ): Call<JsonObject>
+
+
+    @GET("3/movie/upcoming")
+    fun getCinemaListUpcoming(
+        @Query("language") language: String = "ru-RU",
         @Query("api_key") key: String
     ): Call<JsonObject>
 }

@@ -71,8 +71,15 @@ class DetailFragment : Fragment() {
 
     private fun displayCinema(cinema: Cinema) {
         with(binding) {
-            mtvTitle.text = cinema.originalTitle
-            mtvOriginalNameOfCinema.text = cinema.popularity.toString()
+            mtv_title.text = cinema.title
+            mtv_original_name_of_cinema.text = cinema.originalTitle
+//            val genres = cinema.genres as JsonObject.get("name")
+//            detailFragmentMtvGenre.text = genres.toString()
+            mtv_duration.text = cinema.runtime.toString()
+            iv_favorite.setOnClickListener(View.OnClickListener {
+                viewModel.addToFavorites()
+            })
+
         }
     }
 }
