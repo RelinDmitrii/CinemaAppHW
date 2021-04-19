@@ -4,10 +4,13 @@ import android.content.IntentFilter
 import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import com.example.cinemaapphw.Support.MainBroadcastReceiver
 import com.example.cinemaapphw.Support.Support
 import com.example.cinemaapphw.ui.Fragments.FavoritesFragment.FavoritesFragment
 import com.example.cinemaapphw.ui.Fragments.HomeFragment.HomeFragment
+import com.example.cinemaapphw.ui.Fragments.OptionsFragment.OptionsFragment
 import com.example.cinemaapphw.ui.Fragments.RatingsFragment.RatingsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -51,4 +54,13 @@ class MainActivity : AppCompatActivity() {
         super.onDestroy()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.options_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        support.addFragment(OptionsFragment(), true)
+        return super.onOptionsItemSelected(item)
+    }
 }

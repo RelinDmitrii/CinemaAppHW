@@ -1,6 +1,7 @@
 package com.example.androidwithkotlin.room
 
 import android.database.Cursor
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.testcinema.DataClasses.Cinema
 
@@ -9,6 +10,7 @@ interface FavoriteDao {
 
     @Query("SELECT * FROM FavoriteEntity")
     fun all(): List<FavoriteEntity>
+//    fun all(): LiveData<List<FavoriteEntity>>
 
     @Query("SELECT * FROM FavoriteEntity WHERE title LIKE :cinema")
     fun getDataByWord(cinema: String): List<FavoriteEntity>
