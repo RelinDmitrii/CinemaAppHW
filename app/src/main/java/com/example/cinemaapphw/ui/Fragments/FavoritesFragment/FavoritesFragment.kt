@@ -16,6 +16,7 @@ import com.example.testcinema.ui.ViewModelHome.HomeViewModel
 
 class FavoritesFragment : Fragment() {
 
+
     private lateinit var favoritesViewModel: FavoritesViewModel
 
     private var _binding: FragmentFavoritesBinding? = null

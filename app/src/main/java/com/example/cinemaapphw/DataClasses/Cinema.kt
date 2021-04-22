@@ -1,11 +1,12 @@
 package com.example.testcinema.DataClasses
 
 import android.os.Parcelable
+import com.google.gson.JsonArray
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
-@Parcelize
+//@Parcelize
 data class Cinema(
     @SerializedName("id")
     @Expose
@@ -36,8 +37,18 @@ data class Cinema(
     val runtime: Int,
     @SerializedName("adult")
     @Expose
-    val adult: Boolean
-) : Parcelable
+    val adult: Boolean,
+    @SerializedName("budget")
+    @Expose
+    val budget: Int,
+    @SerializedName("revenue")
+    @Expose
+    val revenue: Int,
+    @SerializedName("genres")
+    @Expose
+    val genres: JsonArray
+//) : Parcelable
+)
 
 
 

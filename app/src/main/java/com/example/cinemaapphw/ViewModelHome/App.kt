@@ -28,7 +28,6 @@ class App : Application() {
                             FavoriteDataBase::class.java,
                             DB_NAME
                         )
-                            .allowMainThreadQueries()
                             .build()
                     }
                 }

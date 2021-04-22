@@ -9,11 +9,12 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.cinemaapphw.Support.CinemaLoader
+import com.bumptech.glide.Glide
 import com.example.cinemaapphw.databinding.FragmentDetailBinding
 import com.example.testcinema.DataClasses.Cinema
 import com.example.testcinema.ui.ViewModelHome.AppState
 import kotlinx.android.synthetic.main.fragment_detail.*
+import java.util.function.Consumer
 
 class DetailFragment : Fragment() {
 
@@ -35,12 +36,13 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        arguments?.getParcelable<Cinema>(BUNDLE_DETAIL)?.let {
+        //arguments?.getParcelable<Cinema>(BUNDLE_DETAIL)?.let {
+        arguments?.getInt(BUNDLE_DETAIL, 0)?.let {
             it.also {
 //                val loader = CinemaLoader(this, it.id)
 //                loader.loadCinema()
                 viewModel.getLiveData().observe(viewLifecycleOwner, Observer { renderData(it) })
-                viewModel.getCinemaFromRemoteSource(it.id)
+                viewModel.getCinemaFromRemoteSource(it)
             }
         }
     }
@@ -73,9 +75,24 @@ class DetailFragment : Fragment() {
         with(binding) {
             mtv_title.text = cinema.title
             mtv_original_name_of_cinema.text = cinema.originalTitle
-//            val genres = cinema.genres as JsonObject.get("name")
-//            detailFragmentMtvGenre.text = genres.toString()
-            mtv_duration.text = cinema.runtime.toString()
+            val genres = cinema.genres
+            var finalGenres = ""
+            genres.forEach { element ->
+                    finalGenres += element.asJsonObject.get("name").asString + " "
+            }
+
+            mtv_genre.text = finalGenres
+            mtv_run_time.text = cinema.runtime.toString()
+            mtv_budget.text = cinema.budget.toString()
+            mtv_revenue.text = cinema.revenue.toString()
+            mtv_release_data.text = cinema.releaseDate
+            mtv_overview.text = cinema.overview
+            context?.let {
+                Glide
+                .with(it)
+                .load("https://image.tmdb.org/t/p/w500/${cinema.posterPath}")
+                .into(ivPoster); }
+
             iv_favorite.setOnClickListener(View.OnClickListener {
                 viewModel.addToFavorites()
             })

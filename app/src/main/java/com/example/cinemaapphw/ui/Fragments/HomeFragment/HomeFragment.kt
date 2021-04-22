@@ -1,5 +1,6 @@
 package com.example.cinemaapphw.ui.Fragments.HomeFragment
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -29,10 +30,13 @@ class HomeFragment : Fragment() {
 
     private val homeViewModel: HomeViewModel by lazy { ViewModelProvider(this).get(HomeViewModel::class.java) }
 
+    private val sharedPref by lazy { activity?.getSharedPreferences("Options" , Context.MODE_PRIVATE) }
+
+
     private val adapterListener = object : CinemaListRvAdapter.OnItemClickListener {
         override fun onItemClick(cinema: Cinema) {
             val bundle = Bundle()
-            bundle.putParcelable(DetailFragment.BUNDLE_DETAIL, cinema)
+            bundle.putInt(DetailFragment.BUNDLE_DETAIL, cinema.id)
             (activity as MainActivity).support.addFragment(DetailFragment.newInstance(bundle), true)
             }
         }
@@ -62,11 +66,17 @@ class HomeFragment : Fragment() {
         when (appState) {
             is AppState.SuccessNowPlaying -> {
                 binding.loadingLayout.visibility = View.GONE
+                if(sharedPref?.getBoolean("keyAdult", false) == true) {
+                        appState.CinemaNowPlayingList = appState.CinemaNowPlayingList.filter { !it.adult }
+                    }
                 cinemaListRvAdapter.cinema = appState.CinemaNowPlayingList
 
             }
             is AppState.SuccessUpcoming -> {
                 binding.loadingLayout.visibility = View.GONE
+                if(sharedPref?.getBoolean("keyAdult", false) == true) {
+                    appState.CinemaUpcomingList = appState.CinemaUpcomingList.filter { !it.adult }
+                }
                 cinemaList2RvAdapter.cinema = appState.CinemaUpcomingList
             }
 

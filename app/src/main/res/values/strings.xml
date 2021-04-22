@@ -1,11 +1,18 @@
 <resources>
     <string name="app_name">CinemaAppHW</string>
     <string name="title_home">Home</string>
-    <string name="title_options">Options</string>
+    <string name="menu_options">Options</string>
     <string name="title_favorites">Favorites</string>
     <string name="title_ratings">Ratings</string>
     <string name="error">Error</string>
     <string name="reload">Reload</string>
     <string name="tv_title_home_fragment_nowPlaying">Now Playing</string>
     <string name="tv_title_home_fragment_upcoming">Upcoming</string>
+    <string name="menu_contacts">contacts</string>
+    <string name="access_to_contacts">Доступ к контактам</string>
+    <string name="access_explanation">Доступ необходим для вызова контантактов из списка</string>
+    <string name="access_close">Закрыть</string>
+    <string name="access">Доступ</string>
+    <string name="grant_access">Предоставить доступ</string>
+    <string name="access_reject">Отклонить</string>
 </resources>

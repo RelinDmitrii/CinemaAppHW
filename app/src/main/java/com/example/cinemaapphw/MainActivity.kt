@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import com.example.cinemaapphw.Support.MainBroadcastReceiver
 import com.example.cinemaapphw.Support.Support
+import com.example.cinemaapphw.ui.Fragments.ContactsFragment.ContactsFragment
 import com.example.cinemaapphw.ui.Fragments.FavoritesFragment.FavoritesFragment
 import com.example.cinemaapphw.ui.Fragments.HomeFragment.HomeFragment
 import com.example.cinemaapphw.ui.Fragments.OptionsFragment.OptionsFragment
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var support: Support
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -60,7 +62,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        support.addFragment(OptionsFragment(), true)
+        when(item.itemId){
+            R.id.options -> support.addFragment(OptionsFragment(), true)
+            R.id.contacts -> support.addFragment(ContactsFragment(), true)
+
+        }
+
+
         return super.onOptionsItemSelected(item)
     }
+
+
 }

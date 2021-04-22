@@ -47,7 +47,9 @@ class DetailsViewModel (private val state: MutableLiveData<AppState> = MutableLi
 
     fun addToFavorites(){
         val appstate = state.value as AppState.SuccessDetails
-        detailRepositoryImpl.saveCinemaToFavorites(appstate.cinema)
+        Thread {
+            detailRepositoryImpl.saveCinemaToFavorites(appstate.cinema)
+        }.start()
     }
 
 }

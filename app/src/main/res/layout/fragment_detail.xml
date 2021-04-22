@@ -47,7 +47,7 @@
         app:layout_constraintTop_toBottomOf="@id/mtv_original_name_of_cinema" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/mtv_duration"
+        android:id="@+id/mtv_run_time"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_poster"
-        app:layout_constraintTop_toBottomOf="@id/mtv_duration" />
+        app:layout_constraintTop_toBottomOf="@id/mtv_run_time" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/mtv_revenue"

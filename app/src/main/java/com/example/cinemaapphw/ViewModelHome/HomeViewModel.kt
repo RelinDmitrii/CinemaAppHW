@@ -43,7 +43,7 @@ class HomeViewModel(private val stateNowPlaying: MutableLiveData<AppState> = Mut
                 val gson = Gson()
                 val arrayTutorialType = object : TypeToken<List<Cinema>>() {}.type
                 var cinemaList: List<Cinema> = gson.fromJson(it.get("results"), arrayTutorialType)
-//                cinemaList.filter { it.adult }
+//                cinemaList = cinemaList.filter { !it.adult }
                 stateNowPlaying.postValue(AppState.SuccessNowPlaying(cinemaList))
             }
 
