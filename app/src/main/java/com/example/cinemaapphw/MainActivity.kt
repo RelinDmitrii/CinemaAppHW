@@ -11,6 +11,7 @@ import com.example.cinemaapphw.Support.Support
 import com.example.cinemaapphw.ui.Fragments.ContactsFragment.ContactsFragment
 import com.example.cinemaapphw.ui.Fragments.FavoritesFragment.FavoritesFragment
 import com.example.cinemaapphw.ui.Fragments.HomeFragment.HomeFragment
+import com.example.cinemaapphw.ui.Fragments.MapsFragment.MapsFragment
 import com.example.cinemaapphw.ui.Fragments.OptionsFragment.OptionsFragment
 import com.example.cinemaapphw.ui.Fragments.RatingsFragment.RatingsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -46,6 +47,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_favorites -> {
                     support.addFragment(FavoritesFragment(), false)
                 }
+
             }
             true
         }
@@ -65,7 +67,7 @@ class MainActivity : AppCompatActivity() {
         when(item.itemId){
             R.id.options -> support.addFragment(OptionsFragment(), true)
             R.id.contacts -> support.addFragment(ContactsFragment(), true)
-
+            R.id.maps -> support.addFragment(MapsFragment(), false)
         }
 
 

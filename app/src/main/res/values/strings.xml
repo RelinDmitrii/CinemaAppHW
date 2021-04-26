@@ -15,4 +15,5 @@
     <string name="access">Доступ</string>
     <string name="grant_access">Предоставить доступ</string>
     <string name="access_reject">Отклонить</string>
+    <string name="menu_maps">maps</string>
 </resources>
