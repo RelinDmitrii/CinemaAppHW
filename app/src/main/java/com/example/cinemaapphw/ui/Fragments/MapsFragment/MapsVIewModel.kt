@@ -6,14 +6,9 @@ import android.os.Handler
 import android.os.Looper
 import androidx.annotation.NonNull
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.cinemaapphw.R
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
-import kotlinx.android.synthetic.main.fragment_maps_main.*
 import java.io.IOException
 
 
@@ -42,7 +37,7 @@ class MapsVIewModel (@NonNull application: Application,
         }
     }
 
-    fun addMarcker(marker: Marker) {
+    fun addMarker(marker: Marker) {
         markers.value?.add(marker)
     }
 

@@ -15,9 +15,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.cinemaapphw.R
-import com.example.cinemaapphw.databinding.FragmentMapsBinding
 import com.example.cinemaapphw.databinding.FragmentMapsMainBinding
-import com.example.cinemaapphw.ui.Fragments.FavoritesFragment.FavoritesViewModel
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -125,7 +123,7 @@ class MapsFragment : Fragment() {
 
     private fun addMarkerToArray(location: LatLng) {
         val marker = setMarker(location, viewModel.markers.value?.size.toString(), R.drawable.ic_map_pin)
-        viewModel.addMarcker(marker)
+        viewModel.addMarker(marker)
     }
 
 
