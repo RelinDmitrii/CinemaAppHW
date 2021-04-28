@@ -16,4 +16,6 @@
     <string name="grant_access">Предоставить доступ</string>
     <string name="access_reject">Отклонить</string>
     <string name="menu_maps">maps</string>
+    <string name="chanel_name">Default chanel name</string>
+    <string name="chanel_description">Default chanel description</string>
 </resources>
