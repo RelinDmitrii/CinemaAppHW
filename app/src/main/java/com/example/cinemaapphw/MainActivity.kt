@@ -11,6 +11,7 @@ import com.example.cinemaapphw.Support.Support
 import com.example.cinemaapphw.ui.Fragments.ContactsFragment.ContactsFragment
 import com.example.cinemaapphw.ui.Fragments.FavoritesFragment.FavoritesFragment
 import com.example.cinemaapphw.ui.Fragments.HomeFragment.HomeFragment
+import com.example.cinemaapphw.ui.Fragments.MapsFragment.MapsFragment
 
 import com.example.cinemaapphw.ui.Fragments.OptionsFragment.OptionsFragment
 import com.example.cinemaapphw.ui.Fragments.RatingsFragment.RatingsFragment
@@ -67,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         when(item.itemId){
             R.id.options -> support.addFragment(OptionsFragment(), true)
             R.id.contacts -> support.addFragment(ContactsFragment(), true)
-//            R.id.maps -> support.addFragment(MapsFragment(), false)
+            R.id.maps -> support.addFragment(MapsFragment(), false)
         }
 
 

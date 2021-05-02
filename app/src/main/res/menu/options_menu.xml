@@ -13,6 +13,4 @@
         android:id="@+id/maps"
         android:title="@string/menu_maps"/>
 
-
-
 </menu>
